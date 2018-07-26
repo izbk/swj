@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="mybatis-generator.properties" />
+    <!-- 一个数据库一个context -->
+    <context id="yuanwei" targetRuntime="Mybatis3"  defaultModelType="flat">
+        <!-- defaultModelType="hierarchical" -->
+        <property name="javaFileEncoding" value="UTF-8" />
+        <property name="suppressTypeWarnings" value="true" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.CachePlugin" />
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+            connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}" />
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="${generator.domainPackage}"
+            targetProject="src/main/java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="${generator.mapperPackage}"
+            targetProject="src/main/java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator targetPackage="${generator.daoPackage}" 
+            targetProject="src/main/java" type="XMLMAPPER">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 配置表信息 -->
+		<table tableName="enterprise_feedback"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <!--
+        <table tableName="weixin_auto_response"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="weixin_menu"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="weixin_newsitem"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="weixin_subscribe"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="weixin_text"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="user"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="article"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="article_type"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="article_category"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="audit_config"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="to_do_list"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="township"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="statistician"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="type_group"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="type"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="enterprise"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="enterprise_rise"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="real_report"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="enterprise_manage"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="forecast"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="forecast_detail"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="service_define"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="service_forecast"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="project"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="specialty"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="incubation_park_assess"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="settle_register"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="statistician_reward"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="township_annual_task"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="township_annual_done"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="statistician_report_point"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="statistician_assessment"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="exhibition"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="exhibition_register"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+		<table tableName="intl_exhibition_record"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table> -->
+    </context>
+</generatorConfiguration> 

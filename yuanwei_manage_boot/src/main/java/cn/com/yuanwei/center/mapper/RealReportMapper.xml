@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yuanwei.center.mapper.RealReportMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.yuanwei.center.entity.RealReport" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="enterprise_code" property="enterpriseCode" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="sales" property="sales" jdbcType="DECIMAL" />
+    <result column="retail_sales" property="retailSales" jdbcType="DECIMAL" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, enterprise_code, enterprise_name, sales, retail_sales, year, month, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.RealReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from real_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from real_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from real_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.yuanwei.center.entity.RealReportExample" >
+    delete from real_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yuanwei.center.entity.RealReport"  useGeneratedKeys="true" keyProperty="id">
+    insert into real_report (id, enterprise_code, enterprise_name, 
+      sales, retail_sales, year, 
+      month, create_time)
+    values (#{id,jdbcType=INTEGER}, #{enterpriseCode,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, 
+      #{sales,jdbcType=DECIMAL}, #{retailSales,jdbcType=DECIMAL}, #{year,jdbcType=INTEGER}, 
+      #{month,jdbcType=INTEGER}, #{createTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yuanwei.center.entity.RealReport"  useGeneratedKeys="true" keyProperty="id">
+    insert into real_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="enterpriseCode != null" >
+        enterprise_code,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+      <if test="retailSales != null" >
+        retail_sales,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseCode != null" >
+        #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=DECIMAL},
+      </if>
+      <if test="retailSales != null" >
+        #{retailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yuanwei.center.entity.RealReportExample" resultType="java.lang.Integer" >
+    select count(*) from real_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update real_report
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseCode != null" >
+        enterprise_code = #{record.enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseName != null" >
+        enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sales != null" >
+        sales = #{record.sales,jdbcType=DECIMAL},
+      </if>
+      <if test="record.retailSales != null" >
+        retail_sales = #{record.retailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update real_report
+    set id = #{record.id,jdbcType=INTEGER},
+      enterprise_code = #{record.enterpriseCode,jdbcType=VARCHAR},
+      enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      sales = #{record.sales,jdbcType=DECIMAL},
+      retail_sales = #{record.retailSales,jdbcType=DECIMAL},
+      year = #{record.year,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.yuanwei.center.entity.RealReport" >
+    update real_report
+    <set >
+      <if test="enterpriseCode != null" >
+        enterprise_code = #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=DECIMAL},
+      </if>
+      <if test="retailSales != null" >
+        retail_sales = #{retailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.yuanwei.center.entity.RealReport" >
+    update real_report
+    set enterprise_code = #{enterpriseCode,jdbcType=VARCHAR},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=DECIMAL},
+      retail_sales = #{retailSales,jdbcType=DECIMAL},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.RealReportExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from real_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+    <!-- 自定义SQL -->
+  <resultMap id="RealReportVoMap" type="cn.com.yuanwei.center.entity.RealReportVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="enterprise_code" property="enterpriseCode" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="sales" property="sales" jdbcType="DECIMAL" />
+    <result column="retail_sales" property="retailSales" jdbcType="DECIMAL" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+  </resultMap>    
+  <select resultMap="RealReportVoMap" parameterType="map" id="selectByMap" >
+		SELECT
+			a.id,
+			a.enterprise_code,
+			a.enterprise_name,
+			a.sales,
+			a.retail_sales,
+			a.`year`,
+			a.`month`,
+			a.create_time
+		FROM
+			real_report a
+		LEFT JOIN enterprise b ON a.enterprise_code = b.enterprise_code
+		WHERE 1 = 1		
+	  <if test="id != null" >
+        AND a.`id` = #{id}
+      </if>	
+	  <if test="enterpriseCode != null" >
+        AND a.`enterprise_code` = #{enterpriseCode}
+      </if>		
+      <if test="year != null" >
+        AND a.`year` = #{year}
+      </if>
+      <if test="month != null" >
+        AND a.`month` = #{month}
+      </if>
+      <if test="startMonth != null" >
+        <![CDATA[AND a.`month` >= #{startMonth}]]>
+      </if>
+      <if test="endMonth != null" >
+        <![CDATA[AND a.`month` <= #{endMonth}]]>
+      </if>      
+      <if test="enterpriseName != null" >
+        AND a.`enterprise_name` like #{enterpriseName}
+      </if>
+      <if test="townshipId != null" >
+        AND b.`township_id` = #{townshipId}
+      </if>
+      <if test="enterpriseType != null" >
+        AND b.`enterprise_type` = #{enterpriseType}
+      </if>
+      <if test="industry != null" >
+        AND b.`industry` = #{industry}
+      </if>
+      <if test="inType != null" >
+        AND b.in_type = #{inType}
+      </if>
+      <if test="enterpriseIds != null" >
+        	 AND b.id not in  
+		     <foreach item="item" index="index" collection="enterpriseIds" open="(" separator="," close=")">  
+		      #{item}  
+		     </foreach>
+      </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByMap" parameterType="map" >
+	  delete from real_report
+	  	where 1 = 1 
+  	  <if test="id != null" >
+        AND `id` = #{id}
+      </if>	
+	  <if test="enterpriseCode != null" >
+        AND `enterprise_code` = #{enterpriseCode}
+      </if>
+      <if test="enterpriseName != null" >
+        AND `enterprise_name` like #{enterpriseName}
+      </if>
+      <if test="year != null" >
+        AND `year` = #{year}
+      </if>
+      <if test="month != null" >
+        AND `month` = #{month}
+      </if>
+      <if test="startMonth != null" >
+        <![CDATA[AND `month` >= #{startMonth}]]>
+      </if>
+      <if test="endMonth != null" >
+        <![CDATA[AND `month` <= #{endMonth}]]>
+      </if>
+      <if test="ownshipId != null or enterpriseType != null or industry != null or inType != null">
+          AND `enterprise_code` in (
+          		select b.enterprise_code 
+          		from enterprise b
+          		where real_report.enterprise_code = b.enterprise_code
+		      <if test="townshipId != null" >
+		        AND b.`township_id` = #{townshipId}
+		      </if>
+		      <if test="enterpriseType != null" >
+		        AND b.`enterprise_type` = #{enterpriseType}
+		      </if>
+		      <if test="industry != null" >
+		        AND b.`industry` = #{industry}
+		      </if>
+		      <if test="inType != null" >
+		        AND b.in_type = #{inType}
+		      </if>
+		    )
+      </if>
+  </delete>
+  <select resultType="cn.com.yuanwei.center.entity.RealReport" parameterType="map" id="selectSumByMap" >
+		SELECT
+			IFNULL(sum(a.sales),0) sales,
+			IFNULL(sum(a.retail_sales),0) retailSales
+		FROM
+			real_report a
+		LEFT JOIN enterprise b ON a.enterprise_code = b.enterprise_code
+		WHERE 1 = 1
+	  <if test="id != null" >
+        AND a.`id` = #{id}
+      </if>	
+	  <if test="enterpriseCode != null" >
+        AND a.`enterprise_code` = #{enterpriseCode}
+      </if>
+      <if test="year != null" >
+        AND a.`year` = #{year}
+      </if>
+      <if test="month != null" >
+        AND a.`month` = #{month}
+      </if>
+      <if test="startMonth != null" >
+        <![CDATA[AND a.`month` >= #{startMonth}]]>
+      </if>
+      <if test="endMonth != null" >
+        <![CDATA[AND a.`month` <= #{endMonth}]]>
+      </if>
+      <if test="enterpriseName != null" >
+        AND b.`enterprise_name` like #{enterpriseName}
+      </if>
+      <if test="townshipId != null" >
+        AND b.`township_id` = #{townshipId}
+      </if>
+      <if test="enterpriseType != null" >
+        AND b.`enterprise_type` = #{enterpriseType}
+      </if>
+      <if test="industry != null" >
+        AND b.`industry` = #{industry}
+      </if>
+      <if test="inType != null" >
+        AND b.in_type = #{inType}
+      </if>
+      <if test="enterpriseIds != null" >
+        	 AND b.id not in  
+		     <foreach item="item" index="index" collection="enterpriseIds" open="(" separator="," close=")">  
+		      #{item}  
+		     </foreach>
+      </if>
+  </select>
+  <select resultType="Integer" parameterType="map" id="selectCheckData" >
+		SELECT
+			b.id
+		FROM
+			real_report a
+		LEFT JOIN enterprise b ON a.enterprise_code = b.enterprise_code
+		WHERE a.`year` = #{year}
+		<![CDATA[AND a.`month` >= #{startMonth}]]>
+		<![CDATA[AND a.`month` <= #{endMonth}]]>
+		AND EXISTS (
+			SELECT
+				1
+			FROM
+				enterprise_manage
+			WHERE enterprise_code = b.enterprise_code
+				AND out_way = 0
+				AND DATE_FORMAT(out_date, '%Y%m') = CONCAT(a.`year`,IF (LENGTH(a.`month`) = 1, '0', ''),a.`month`)
+		)
+   </select>
+  <!-- 数据预测 -->
+  <resultMap id="ForecastResultMap" type="cn.com.yuanwei.center.entity.RealReportVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="enterprise_code" property="enterpriseCode" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="sales" property="sales" jdbcType="DECIMAL" />
+    <result column="retail_sales" property="retailSales" jdbcType="DECIMAL" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="enterprise_type" property="enterpriseType" jdbcType="INTEGER" />
+    <result column="industry" property="industry" jdbcType="INTEGER" />
+    <result column="in_type" property="inType" jdbcType="INTEGER" />
+  </resultMap>
+  <select resultMap="ForecastResultMap" parameterType="map" id="selectByExampleWithInTypes" >
+    SELECT
+    	IFNULL(sum(r.sales),0) sales,
+		IFNULL(sum(r.retail_sales),0) retail_sales,
+		r.`year`,
+		e.id,
+		e.enterprise_code,
+		e.enterprise_name,
+		e.enterprise_type,
+		e.industry,
+		e.in_type
+	FROM
+		enterprise e left join real_report r on e.enterprise_code = r.enterprise_code
+	WHERE		   
+	 e.in_type in
+     <foreach item="item" index="index" collection="inTypes" open="(" separator="," close=")">  
+      #{item}  
+     </foreach> 
+     AND r.`year` = #{record.year}
+     <![CDATA[AND r.`month` <= #{record.month}]]>
+      <if test="record.startMonth != null" >
+        <![CDATA[AND r.`month` >= #{record.startMonth}]]>
+     </if>	
+     <if test="record.id != null" >
+        AND e.`id` = #{record.id}
+     </if>	
+     GROUP BY r.`year`,
+				e.id,
+				e.enterprise_code,
+				e.enterprise_name,
+				e.enterprise_type,
+				e.industry,
+				e.in_type
+  </select>
+  <select resultMap="ForecastResultMap" parameterType="map" id="selectRetailSalesForSum">
+    SELECT
+		IFNULL(SUM(r.retail_sales),0) as retail_sales
+	FROM
+		real_report r,
+		enterprise e
+	WHERE
+		   r.enterprise_code = e.enterprise_code
+	 AND e.in_type in  
+     <foreach item="item" index="index" collection="inTypes" open="(" separator="," close=")">  
+      #{item}  
+     </foreach> 
+     AND r.year = #{year}
+     AND r.month between 1 and #{month}
+  </select>
+  <select resultMap="ForecastResultMap" parameterType="map" id="selectRetailSalesForReduce">
+	    SELECT
+			IFNULL(SUM(a.retail_sales),0) as retail_sales
+		FROM
+			real_report a 
+		WHERE
+			a. YEAR = #{year}
+		AND a.MONTH BETWEEN #{start_month} AND #{end_month}
+		AND NOT EXISTS (
+			SELECT
+				1
+			FROM
+				real_report b 
+			WHERE
+		 a.enterprise_code= b.enterprise_code
+			AND b.YEAR = #{last_year}
+			AND b.MONTH BETWEEN #{start_month} AND #{end_month}
+		)
+  </select>
+   <insert id="batchInsert" parameterType="List" >
+    insert into real_report (enterprise_code, enterprise_name, 
+      sales, retail_sales, year, 
+      month, create_time)
+    values 
+    <foreach collection="list" item="item" index="index" separator=",">
+    (#{item.enterpriseCode,jdbcType=VARCHAR}, #{item.enterpriseName,jdbcType=VARCHAR}, 
+      #{item.sales,jdbcType=DECIMAL}, #{item.retailSales,jdbcType=DECIMAL}, #{item.year,jdbcType=INTEGER}, 
+      #{item.month,jdbcType=INTEGER}, #{item.createTime,jdbcType=DATE})
+      </foreach>
+  </insert>
+  <select id="selectDistinctMonths" parameterType="map" resultType="Integer">
+	  SELECT DISTINCT
+		MONTH
+		FROM real_report
+	  WHERE YEAR = #{year}
+	     AND MONTH BETWEEN #{start_month} AND #{end_month}
+  </select>
+
+  <cache />
+</mapper>

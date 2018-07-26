@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yuanwei.center.mapper.IncubationParkCompanyMapper">
+  <resultMap id="BaseResultMap" type="cn.com.yuanwei.center.entity.IncubationParkCompany">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="business_subject" jdbcType="VARCHAR" property="businessSubject" />
+    <result column="legal_person" jdbcType="VARCHAR" property="legalPerson" />
+    <result column="company_type" jdbcType="INTEGER" property="companyType" />
+    <result column="rooms" jdbcType="INTEGER" property="rooms" />
+    <result column="areas" jdbcType="VARCHAR" property="areas" />
+    <result column="business_scope" jdbcType="VARCHAR" property="businessScope" />
+    <result column="team_number" jdbcType="INTEGER" property="teamNumber" />
+    <result column="project_introduction" jdbcType="VARCHAR" property="projectIntroduction" />
+    <result column="company_desc" jdbcType="VARCHAR" property="companyDesc" />
+    <result column="evaluate" jdbcType="VARCHAR" property="evaluate" />
+    <result column="development" jdbcType="VARCHAR" property="development" />
+    <result column="ec_examination" jdbcType="VARCHAR" property="ecExamination" />
+    <result column="company_status" jdbcType="INTEGER" property="companyStatus" />
+    <result column="in_date" jdbcType="TIMESTAMP" property="inDate" />
+    <result column="out_date" jdbcType="TIMESTAMP" property="outDate" />
+    <result column="out_reason" jdbcType="VARCHAR" property="outReason" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, mobile, business_subject, legal_person, company_type, rooms, areas, business_scope, 
+    team_number, project_introduction, company_desc, evaluate, development, ec_examination, 
+    company_status, in_date, out_date, out_reason, remark, create_by, create_time
+  </sql>
+  <select id="selectByExample" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from incubation_park_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from incubation_park_company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from incubation_park_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompanyExample">
+    delete from incubation_park_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompany">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into incubation_park_company (name, mobile, business_subject, 
+      legal_person, company_type, rooms, 
+      areas, business_scope, team_number, 
+      project_introduction, company_desc, evaluate, 
+      development, ec_examination, company_status, 
+      in_date, out_date, out_reason, 
+      remark, create_by, create_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{businessSubject,jdbcType=VARCHAR}, 
+      #{legalPerson,jdbcType=VARCHAR}, #{companyType,jdbcType=INTEGER}, #{rooms,jdbcType=INTEGER}, 
+      #{areas,jdbcType=VARCHAR}, #{businessScope,jdbcType=VARCHAR}, #{teamNumber,jdbcType=INTEGER}, 
+      #{projectIntroduction,jdbcType=VARCHAR}, #{companyDesc,jdbcType=VARCHAR}, #{evaluate,jdbcType=VARCHAR}, 
+      #{development,jdbcType=VARCHAR}, #{ecExamination,jdbcType=VARCHAR}, #{companyStatus,jdbcType=INTEGER}, 
+      #{inDate,jdbcType=TIMESTAMP}, #{outDate,jdbcType=TIMESTAMP}, #{outReason,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompany">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into incubation_park_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="businessSubject != null">
+        business_subject,
+      </if>
+      <if test="legalPerson != null">
+        legal_person,
+      </if>
+      <if test="companyType != null">
+        company_type,
+      </if>
+      <if test="rooms != null">
+        rooms,
+      </if>
+      <if test="areas != null">
+        areas,
+      </if>
+      <if test="businessScope != null">
+        business_scope,
+      </if>
+      <if test="teamNumber != null">
+        team_number,
+      </if>
+      <if test="projectIntroduction != null">
+        project_introduction,
+      </if>
+      <if test="companyDesc != null">
+        company_desc,
+      </if>
+      <if test="evaluate != null">
+        evaluate,
+      </if>
+      <if test="development != null">
+        development,
+      </if>
+      <if test="ecExamination != null">
+        ec_examination,
+      </if>
+      <if test="companyStatus != null">
+        company_status,
+      </if>
+      <if test="inDate != null">
+        in_date,
+      </if>
+      <if test="outDate != null">
+        out_date,
+      </if>
+      <if test="outReason != null">
+        out_reason,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSubject != null">
+        #{businessSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        #{companyType,jdbcType=INTEGER},
+      </if>
+      <if test="rooms != null">
+        #{rooms,jdbcType=INTEGER},
+      </if>
+      <if test="areas != null">
+        #{areas,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null">
+        #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="teamNumber != null">
+        #{teamNumber,jdbcType=INTEGER},
+      </if>
+      <if test="projectIntroduction != null">
+        #{projectIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyDesc != null">
+        #{companyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluate != null">
+        #{evaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="development != null">
+        #{development,jdbcType=VARCHAR},
+      </if>
+      <if test="ecExamination != null">
+        #{ecExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatus != null">
+        #{companyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        #{inDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outDate != null">
+        #{outDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outReason != null">
+        #{outReason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompanyExample" resultType="java.lang.Integer">
+    select count(*) from incubation_park_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update incubation_park_company
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessSubject != null">
+        business_subject = #{record.businessSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPerson != null">
+        legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyType != null">
+        company_type = #{record.companyType,jdbcType=INTEGER},
+      </if>
+      <if test="record.rooms != null">
+        rooms = #{record.rooms,jdbcType=INTEGER},
+      </if>
+      <if test="record.areas != null">
+        areas = #{record.areas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessScope != null">
+        business_scope = #{record.businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamNumber != null">
+        team_number = #{record.teamNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectIntroduction != null">
+        project_introduction = #{record.projectIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyDesc != null">
+        company_desc = #{record.companyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluate != null">
+        evaluate = #{record.evaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.development != null">
+        development = #{record.development,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecExamination != null">
+        ec_examination = #{record.ecExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyStatus != null">
+        company_status = #{record.companyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.inDate != null">
+        in_date = #{record.inDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outDate != null">
+        out_date = #{record.outDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outReason != null">
+        out_reason = #{record.outReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update incubation_park_company
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      business_subject = #{record.businessSubject,jdbcType=VARCHAR},
+      legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      company_type = #{record.companyType,jdbcType=INTEGER},
+      rooms = #{record.rooms,jdbcType=INTEGER},
+      areas = #{record.areas,jdbcType=VARCHAR},
+      business_scope = #{record.businessScope,jdbcType=VARCHAR},
+      team_number = #{record.teamNumber,jdbcType=INTEGER},
+      project_introduction = #{record.projectIntroduction,jdbcType=VARCHAR},
+      company_desc = #{record.companyDesc,jdbcType=VARCHAR},
+      evaluate = #{record.evaluate,jdbcType=VARCHAR},
+      development = #{record.development,jdbcType=VARCHAR},
+      ec_examination = #{record.ecExamination,jdbcType=VARCHAR},
+      company_status = #{record.companyStatus,jdbcType=INTEGER},
+      in_date = #{record.inDate,jdbcType=TIMESTAMP},
+      out_date = #{record.outDate,jdbcType=TIMESTAMP},
+      out_reason = #{record.outReason,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompany">
+    update incubation_park_company
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSubject != null">
+        business_subject = #{businessSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        company_type = #{companyType,jdbcType=INTEGER},
+      </if>
+      <if test="rooms != null">
+        rooms = #{rooms,jdbcType=INTEGER},
+      </if>
+      <if test="areas != null">
+        areas = #{areas,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null">
+        business_scope = #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="teamNumber != null">
+        team_number = #{teamNumber,jdbcType=INTEGER},
+      </if>
+      <if test="projectIntroduction != null">
+        project_introduction = #{projectIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyDesc != null">
+        company_desc = #{companyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluate != null">
+        evaluate = #{evaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="development != null">
+        development = #{development,jdbcType=VARCHAR},
+      </if>
+      <if test="ecExamination != null">
+        ec_examination = #{ecExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="companyStatus != null">
+        company_status = #{companyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        in_date = #{inDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outDate != null">
+        out_date = #{outDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outReason != null">
+        out_reason = #{outReason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompany">
+    update incubation_park_company
+    set name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      business_subject = #{businessSubject,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      company_type = #{companyType,jdbcType=INTEGER},
+      rooms = #{rooms,jdbcType=INTEGER},
+      areas = #{areas,jdbcType=VARCHAR},
+      business_scope = #{businessScope,jdbcType=VARCHAR},
+      team_number = #{teamNumber,jdbcType=INTEGER},
+      project_introduction = #{projectIntroduction,jdbcType=VARCHAR},
+      company_desc = #{companyDesc,jdbcType=VARCHAR},
+      evaluate = #{evaluate,jdbcType=VARCHAR},
+      development = #{development,jdbcType=VARCHAR},
+      ec_examination = #{ecExamination,jdbcType=VARCHAR},
+      company_status = #{companyStatus,jdbcType=INTEGER},
+      in_date = #{inDate,jdbcType=TIMESTAMP},
+      out_date = #{outDate,jdbcType=TIMESTAMP},
+      out_reason = #{outReason,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.com.yuanwei.center.entity.IncubationParkCompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from incubation_park_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <cache />
+</mapper>

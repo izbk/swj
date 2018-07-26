@@ -1,0 +1,15 @@
+<AppSetting>
+	<!-- 测试账号 -->
+    <!-- <appId>wx0dc922230c610fcd</appId>
+    <secret>3b2ed06af0afb21901ba4e6fe25666f9</secret>
+    <token>qwerttyuiop360</token>
+    <aesKey>upvinDinnfeJAlNUuuPPdccfGLQr83pJKX7mp87qfV3</aesKey> -->
+    <!-- 可以指定自己的tokenHolderClass，继承与com.riversoft.weixin.common.AccessTokenHolder
+    <tokenHolderClass>com.abc.Abc</tokenHolderClass>
+    -->
+    <!-- 正式账号 -->
+    <appId>wx33fd03bdeaf45317</appId>
+    <secret>809ce98b4110257658d17964d0af572f</secret>
+    <token>qwerttyuiop360</token>
+    <aesKey>G7iqkcCia3ocnAEaezk5AtddNyfyThfwd6JacLCTyok</aesKey>
+</AppSetting>

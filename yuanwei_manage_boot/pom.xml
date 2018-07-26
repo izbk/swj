@@ -1,0 +1,273 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.keren</groupId>
+  <artifactId>yuanwei_manage_boot</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>yuanwei_manage_boot</name>
+  <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.2.RELEASE</version>
+   </parent>
+   <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+		<springfox.version>2.6.1</springfox.version>
+		<poi.version>3.15</poi.version>
+		<easypoi.version>2.1.4</easypoi.version>
+		<guava.version>16.0.1</guava.version>
+		<commons-lang.version>3.2.1</commons-lang.version>
+		<xstream.version>1.4.4</xstream.version>
+  </properties>
+  <dependencies>
+  		<!-- web基本包 -->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  			<exclusions><!-- 去掉默认配置 -->  
+	            <exclusion>  
+	                <groupId>org.springframework.boot</groupId>  
+	                <artifactId>spring-boot-starter-logging</artifactId>  
+	            </exclusion>  
+       		</exclusions>  
+  		</dependency>
+  		<!-- spring开发工具,支持热修改 -->
+  		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	        <optional>true</optional>
+	    </dependency>
+  		<!-- 切面包 -->
+  		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-aop</artifactId>
+	</dependency>
+  		<!-- redis -->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-redis</artifactId>
+  		</dependency>
+  		<!-- websocket -->
+  		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+  		<!-- swagger2 -->
+  		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${springfox.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>${springfox.version}</version>
+		</dependency>
+		<!-- 测试包 -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.20</version>
+			 <exclusions>
+                <exclusion>  
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>jconsole</artifactId>
+                </exclusion>  
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>tools</artifactId>
+                </exclusion>
+        	</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.12</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper</artifactId>
+		    <version>4.1.6</version>
+		</dependency>
+		
+		<!-- 七牛 -->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>7.0.4</version>
+		</dependency>
+		
+		<dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-log4j2</artifactId>  
+        </dependency>
+        
+        <!-- poi start -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jeecgframework</groupId>
+			<artifactId>easy-poi-base</artifactId>
+			<version>${easypoi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jeecgframework</groupId>
+			<artifactId>easy-poi-web</artifactId>
+			<version>${easypoi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jeecgframework</groupId>
+			<artifactId>easy-poi-annotation</artifactId>
+			<version>${easypoi.version}</version>
+		</dependency>
+		
+		<!-- google 工具类 -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang.version}</version>
+			</dependency>
+		<!-- poi end -->
+			<!-- Xml数据导出导入 -->
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>${xstream.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+			</dependency>
+			<dependency>
+			    <groupId>cn.com.riversoft</groupId>
+			    <artifactId>weixin-common</artifactId>
+			    <version>0.9.5</version>
+			</dependency>
+			<dependency>
+			    <groupId>cn.com.riversoft</groupId>
+			    <artifactId>weixin-mp</artifactId>
+			    <version>0.9.5</version>
+			</dependency>
+			<!-- aliyun oss -->  
+			<dependency>  
+			    <groupId>com.aliyun.oss</groupId>  
+			    <artifactId>aliyun-sdk-oss</artifactId>  
+			    <version>2.7.0</version>  
+			</dependency> 
+  </dependencies>
+  
+  <build>
+    <resources>  
+            <resource>  
+                <directory>src/main/java</directory>  
+                <includes>  
+                    <include>**/*.properties</include>  
+                    <include>**/*.xml</include>  
+                </includes>  
+                <!-- 是否替换资源中的属性-->  
+                <filtering>false</filtering>  
+            </resource>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+            </resource>  
+        </resources>  
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                	<!-- 热部署 -->
+               		<fork>true</fork>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        
+        <pluginManagement>
+        <plugins>
+       		 <plugin>
+				    <groupId>org.mybatis.generator</groupId>
+				    <artifactId>mybatis-generator-maven-plugin</artifactId>
+				    <version>1.3.2</version>
+				    <configuration>
+				        <configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
+				        <verbose>true</verbose>
+				        <overwrite>true</overwrite>
+				    </configuration>
+				    <executions>
+				        <execution>
+				            <id>Generate MyBatis Artifacts</id>
+				            <goals>
+				                <goal>generate</goal>
+				            </goals>
+				        </execution>
+				    </executions>
+				    <dependencies>
+				        <dependency>
+				            <groupId>org.mybatis.generator</groupId>
+				            <artifactId>mybatis-generator-core</artifactId>
+				            <version>1.3.2</version>
+				        </dependency>
+				        <dependency>
+							<groupId>mysql</groupId>
+							<artifactId>mysql-connector-java</artifactId>
+							<version>5.1.38</version>
+						</dependency>
+				    </dependencies>
+				</plugin>
+				</plugins>
+        </pluginManagement>
+    </build>
+</project>

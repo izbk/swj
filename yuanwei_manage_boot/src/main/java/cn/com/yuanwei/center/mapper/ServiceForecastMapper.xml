@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yuanwei.center.mapper.ServiceForecastMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.yuanwei.center.entity.ServiceForecast" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="define_id" property="defineId" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="curr_month" property="currMonth" jdbcType="DECIMAL" />
+    <result column="curr_amount" property="currAmount" jdbcType="DECIMAL" />
+    <result column="curr_amount_rise" property="currAmountRise" jdbcType="DECIMAL" />
+    <result column="last_month" property="lastMonth" jdbcType="DECIMAL" />
+    <result column="last_amount" property="lastAmount" jdbcType="DECIMAL" />
+    <result column="last_amount_rise" property="lastAmountRise" jdbcType="DECIMAL" />
+    <result column="problem" property="problem" jdbcType="VARCHAR" />
+    <result column="solution" property="solution" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, define_id, year, month, curr_month, curr_amount, curr_amount_rise, last_month, 
+    last_amount, last_amount_rise, problem, solution
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.ServiceForecastExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from service_forecast
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from service_forecast
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from service_forecast
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.yuanwei.center.entity.ServiceForecastExample" >
+    delete from service_forecast
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yuanwei.center.entity.ServiceForecast"  useGeneratedKeys="true" keyProperty="id">
+    insert into service_forecast (id, define_id, year, 
+      month, curr_month, curr_amount, 
+      curr_amount_rise, last_month, last_amount, 
+      last_amount_rise, problem, solution
+      )
+    values (#{id,jdbcType=INTEGER}, #{defineId,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, 
+      #{month,jdbcType=INTEGER}, #{currMonth,jdbcType=DECIMAL}, #{currAmount,jdbcType=DECIMAL}, 
+      #{currAmountRise,jdbcType=DECIMAL}, #{lastMonth,jdbcType=DECIMAL}, #{lastAmount,jdbcType=DECIMAL}, 
+      #{lastAmountRise,jdbcType=DECIMAL}, #{problem,jdbcType=VARCHAR}, #{solution,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yuanwei.center.entity.ServiceForecast"  useGeneratedKeys="true" keyProperty="id">
+    insert into service_forecast
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="defineId != null" >
+        define_id,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="currMonth != null" >
+        curr_month,
+      </if>
+      <if test="currAmount != null" >
+        curr_amount,
+      </if>
+      <if test="currAmountRise != null" >
+        curr_amount_rise,
+      </if>
+      <if test="lastMonth != null" >
+        last_month,
+      </if>
+      <if test="lastAmount != null" >
+        last_amount,
+      </if>
+      <if test="lastAmountRise != null" >
+        last_amount_rise,
+      </if>
+      <if test="problem != null" >
+        problem,
+      </if>
+      <if test="solution != null" >
+        solution,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="defineId != null" >
+        #{defineId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="currMonth != null" >
+        #{currMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="currAmount != null" >
+        #{currAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="currAmountRise != null" >
+        #{currAmountRise,jdbcType=DECIMAL},
+      </if>
+      <if test="lastMonth != null" >
+        #{lastMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="lastAmount != null" >
+        #{lastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="lastAmountRise != null" >
+        #{lastAmountRise,jdbcType=DECIMAL},
+      </if>
+      <if test="problem != null" >
+        #{problem,jdbcType=VARCHAR},
+      </if>
+      <if test="solution != null" >
+        #{solution,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yuanwei.center.entity.ServiceForecastExample" resultType="java.lang.Integer" >
+    select count(*) from service_forecast
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update service_forecast
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.defineId != null" >
+        define_id = #{record.defineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.currMonth != null" >
+        curr_month = #{record.currMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currAmount != null" >
+        curr_amount = #{record.currAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currAmountRise != null" >
+        curr_amount_rise = #{record.currAmountRise,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastMonth != null" >
+        last_month = #{record.lastMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastAmount != null" >
+        last_amount = #{record.lastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastAmountRise != null" >
+        last_amount_rise = #{record.lastAmountRise,jdbcType=DECIMAL},
+      </if>
+      <if test="record.problem != null" >
+        problem = #{record.problem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.solution != null" >
+        solution = #{record.solution,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update service_forecast
+    set id = #{record.id,jdbcType=INTEGER},
+      define_id = #{record.defineId,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=INTEGER},
+      curr_month = #{record.currMonth,jdbcType=DECIMAL},
+      curr_amount = #{record.currAmount,jdbcType=DECIMAL},
+      curr_amount_rise = #{record.currAmountRise,jdbcType=DECIMAL},
+      last_month = #{record.lastMonth,jdbcType=DECIMAL},
+      last_amount = #{record.lastAmount,jdbcType=DECIMAL},
+      last_amount_rise = #{record.lastAmountRise,jdbcType=DECIMAL},
+      problem = #{record.problem,jdbcType=VARCHAR},
+      solution = #{record.solution,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.yuanwei.center.entity.ServiceForecast" >
+    update service_forecast
+    <set >
+      <if test="defineId != null" >
+        define_id = #{defineId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="currMonth != null" >
+        curr_month = #{currMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="currAmount != null" >
+        curr_amount = #{currAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="currAmountRise != null" >
+        curr_amount_rise = #{currAmountRise,jdbcType=DECIMAL},
+      </if>
+      <if test="lastMonth != null" >
+        last_month = #{lastMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="lastAmount != null" >
+        last_amount = #{lastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="lastAmountRise != null" >
+        last_amount_rise = #{lastAmountRise,jdbcType=DECIMAL},
+      </if>
+      <if test="problem != null" >
+        problem = #{problem,jdbcType=VARCHAR},
+      </if>
+      <if test="solution != null" >
+        solution = #{solution,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.yuanwei.center.entity.ServiceForecast" >
+    update service_forecast
+    set define_id = #{defineId,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      curr_month = #{currMonth,jdbcType=DECIMAL},
+      curr_amount = #{currAmount,jdbcType=DECIMAL},
+      curr_amount_rise = #{currAmountRise,jdbcType=DECIMAL},
+      last_month = #{lastMonth,jdbcType=DECIMAL},
+      last_amount = #{lastAmount,jdbcType=DECIMAL},
+      last_amount_rise = #{lastAmountRise,jdbcType=DECIMAL},
+      problem = #{problem,jdbcType=VARCHAR},
+      solution = #{solution,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.ServiceForecastExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from service_forecast
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <cache />
+</mapper>

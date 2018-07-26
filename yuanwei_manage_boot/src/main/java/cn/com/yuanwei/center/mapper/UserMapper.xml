@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yuanwei.center.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.yuanwei.center.entity.User" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+    <result column="PID" property="pid" jdbcType="INTEGER" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+    <result column="PIC" property="pic" jdbcType="VARCHAR" />
+    <result column="INDEX_ID" property="indexId" jdbcType="VARCHAR" />
+    <result column="POINT" property="point" jdbcType="INTEGER" />
+    <result column="SOURCE" property="source" jdbcType="INTEGER" />
+    <result column="LEVEL_NAME" property="levelName" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="IS_DEL" property="isDel" jdbcType="INTEGER" />
+    <result column="REG_TIME" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="TOWNSHIP_ID" property="townshipId" jdbcType="INTEGER" />
+    <result column="DEPART_ID" property="departId" jdbcType="INTEGER" />
+    <result column="OPEN_ID" property="openId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ROLE_ID, PID, MOBILE_PHONE, LOGIN_NAME, NICK_NAME, EMAIL, PWD, PIC, INDEX_ID, 
+    POINT, SOURCE, LEVEL_NAME, LEVEL, STATUS, IS_DEL, REG_TIME, TOWNSHIP_ID, DEPART_ID, 
+    OPEN_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.yuanwei.center.entity.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yuanwei.center.entity.User"  useGeneratedKeys="true" keyProperty="id">
+    insert into user (ID, ROLE_ID, PID, 
+      MOBILE_PHONE, LOGIN_NAME, NICK_NAME, 
+      EMAIL, PWD, PIC, INDEX_ID, 
+      POINT, SOURCE, LEVEL_NAME, 
+      LEVEL, STATUS, IS_DEL, 
+      REG_TIME, TOWNSHIP_ID, DEPART_ID, 
+      OPEN_ID)
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{indexId,jdbcType=VARCHAR}, 
+      #{point,jdbcType=INTEGER}, #{source,jdbcType=INTEGER}, #{levelName,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, 
+      #{regTime,jdbcType=TIMESTAMP}, #{townshipId,jdbcType=INTEGER}, #{departId,jdbcType=INTEGER}, 
+      #{openId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yuanwei.center.entity.User"  useGeneratedKeys="true" keyProperty="id">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
+      </if>
+      <if test="loginName != null" >
+        LOGIN_NAME,
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="pwd != null" >
+        PWD,
+      </if>
+      <if test="pic != null" >
+        PIC,
+      </if>
+      <if test="indexId != null" >
+        INDEX_ID,
+      </if>
+      <if test="point != null" >
+        POINT,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="levelName != null" >
+        LEVEL_NAME,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="regTime != null" >
+        REG_TIME,
+      </if>
+      <if test="townshipId != null" >
+        TOWNSHIP_ID,
+      </if>
+      <if test="departId != null" >
+        DEPART_ID,
+      </if>
+      <if test="openId != null" >
+        OPEN_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="indexId != null" >
+        #{indexId,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="levelName != null" >
+        #{levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="townshipId != null" >
+        #{townshipId,jdbcType=INTEGER},
+      </if>
+      <if test="departId != null" >
+        #{departId,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yuanwei.center.entity.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobilePhone != null" >
+        MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginName != null" >
+        LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        NICK_NAME = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null" >
+        PWD = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null" >
+        PIC = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexId != null" >
+        INDEX_ID = #{record.indexId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.point != null" >
+        POINT = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.source != null" >
+        SOURCE = #{record.source,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelName != null" >
+        LEVEL_NAME = #{record.levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDel != null" >
+        IS_DEL = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.regTime != null" >
+        REG_TIME = #{record.regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.townshipId != null" >
+        TOWNSHIP_ID = #{record.townshipId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departId != null" >
+        DEPART_ID = #{record.departId,jdbcType=INTEGER},
+      </if>
+      <if test="record.openId != null" >
+        OPEN_ID = #{record.openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set ID = #{record.id,jdbcType=INTEGER},
+      ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+      PID = #{record.pid,jdbcType=INTEGER},
+      MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
+      LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+      NICK_NAME = #{record.nickName,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      PWD = #{record.pwd,jdbcType=VARCHAR},
+      PIC = #{record.pic,jdbcType=VARCHAR},
+      INDEX_ID = #{record.indexId,jdbcType=VARCHAR},
+      POINT = #{record.point,jdbcType=INTEGER},
+      SOURCE = #{record.source,jdbcType=INTEGER},
+      LEVEL_NAME = #{record.levelName,jdbcType=VARCHAR},
+      LEVEL = #{record.level,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      IS_DEL = #{record.isDel,jdbcType=INTEGER},
+      REG_TIME = #{record.regTime,jdbcType=TIMESTAMP},
+      TOWNSHIP_ID = #{record.townshipId,jdbcType=INTEGER},
+      DEPART_ID = #{record.departId,jdbcType=INTEGER},
+      OPEN_ID = #{record.openId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.yuanwei.center.entity.User" >
+    update user
+    <set >
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        PIC = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="indexId != null" >
+        INDEX_ID = #{indexId,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        POINT = #{point,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        SOURCE = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="levelName != null" >
+        LEVEL_NAME = #{levelName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="regTime != null" >
+        REG_TIME = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="townshipId != null" >
+        TOWNSHIP_ID = #{townshipId,jdbcType=INTEGER},
+      </if>
+      <if test="departId != null" >
+        DEPART_ID = #{departId,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        OPEN_ID = #{openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.yuanwei.center.entity.User" >
+    update user
+    set ROLE_ID = #{roleId,jdbcType=INTEGER},
+      PID = #{pid,jdbcType=INTEGER},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      PIC = #{pic,jdbcType=VARCHAR},
+      INDEX_ID = #{indexId,jdbcType=VARCHAR},
+      POINT = #{point,jdbcType=INTEGER},
+      SOURCE = #{source,jdbcType=INTEGER},
+      LEVEL_NAME = #{levelName,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      IS_DEL = #{isDel,jdbcType=INTEGER},
+      REG_TIME = #{regTime,jdbcType=TIMESTAMP},
+      TOWNSHIP_ID = #{townshipId,jdbcType=INTEGER},
+      DEPART_ID = #{departId,jdbcType=INTEGER},
+      OPEN_ID = #{openId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.UserExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <resultMap id="userMap" type="cn.com.yuanwei.center.entity.UserVo" >
+    <result column="roleName" property="roleName" jdbcType="VARCHAR" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="REG_TIME" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="townshipName" property="townshipName" jdbcType="VARCHAR" />
+    <result column="departName" property="departName" jdbcType="VARCHAR" />
+  </resultMap>
+  <select resultMap="userMap" parameterType="cn.com.yuanwei.center.entity.UserExample" id="selectByExampleForExport" >
+	SELECT
+		(select name from role where id = `user`.ROLE_ID) roleName,
+		MOBILE_PHONE,
+		LOGIN_NAME,
+		NICK_NAME,
+		EMAIL,
+		(select type_name from type where type_group_id = 2 and type_code = `user`.`status`) as `status`,
+		REG_TIME as regTime,
+	    (SELECT name from township where id= `user`.TOWNSHIP_ID ) as townshipName,
+		(SELECT departname from department where id= `user`.DEPART_ID ) as departName
+	FROM
+		USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <cache />
+</mapper>

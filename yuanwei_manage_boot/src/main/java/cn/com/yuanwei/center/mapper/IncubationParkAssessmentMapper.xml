@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yuanwei.center.mapper.IncubationParkAssessmentMapper">
+  <resultMap id="BaseResultMap" type="cn.com.yuanwei.center.entity.IncubationParkAssessment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ipcompany_id" jdbcType="INTEGER" property="ipcompanyId" />
+    <result column="business_subject" jdbcType="VARCHAR" property="businessSubject" />
+    <result column="assess_date" jdbcType="DATE" property="assessDate" />
+    <result column="ycqts" jdbcType="DECIMAL" property="ycqts" />
+    <result column="attendance" jdbcType="VARCHAR" property="attendance" />
+    <result column="attend_point" jdbcType="INTEGER" property="attendPoint" />
+    <result column="avg_team_num" jdbcType="DECIMAL" property="avgTeamNum" />
+    <result column="team_point" jdbcType="INTEGER" property="teamPoint" />
+    <result column="evaluate" jdbcType="VARCHAR" property="evaluate" />
+    <result column="perform_point" jdbcType="INTEGER" property="performPoint" />
+    <result column="deduct_reason" jdbcType="VARCHAR" property="deductReason" />
+    <result column="deduct_point" jdbcType="INTEGER" property="deductPoint" />
+    <result column="plus_reason" jdbcType="VARCHAR" property="plusReason" />
+    <result column="plus_point" jdbcType="INTEGER" property="plusPoint" />
+    <result column="total_point" jdbcType="INTEGER" property="totalPoint" />
+    <result column="reamrk" jdbcType="VARCHAR" property="reamrk" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ipcompany_id, business_subject, assess_date, ycqts, attendance, attend_point, 
+    avg_team_num, team_point, evaluate, perform_point, deduct_reason, deduct_point, plus_reason, 
+    plus_point, total_point, reamrk, create_by, create_time
+  </sql>
+  <select id="selectByExample" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from incubation_park_assessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from incubation_park_assessment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from incubation_park_assessment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessmentExample">
+    delete from incubation_park_assessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into incubation_park_assessment (ipcompany_id, business_subject, assess_date, 
+      ycqts, attendance, attend_point, 
+      avg_team_num, team_point, evaluate, 
+      perform_point, deduct_reason, deduct_point, 
+      plus_reason, plus_point, total_point, 
+      reamrk, create_by, create_time
+      )
+    values (#{ipcompanyId,jdbcType=INTEGER}, #{businessSubject,jdbcType=VARCHAR}, #{assessDate,jdbcType=DATE}, 
+      #{ycqts,jdbcType=DECIMAL}, #{attendance,jdbcType=VARCHAR}, #{attendPoint,jdbcType=INTEGER}, 
+      #{avgTeamNum,jdbcType=DECIMAL}, #{teamPoint,jdbcType=INTEGER}, #{evaluate,jdbcType=VARCHAR}, 
+      #{performPoint,jdbcType=INTEGER}, #{deductReason,jdbcType=VARCHAR}, #{deductPoint,jdbcType=INTEGER}, 
+      #{plusReason,jdbcType=VARCHAR}, #{plusPoint,jdbcType=INTEGER}, #{totalPoint,jdbcType=INTEGER}, 
+      #{reamrk,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into incubation_park_assessment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ipcompanyId != null">
+        ipcompany_id,
+      </if>
+      <if test="businessSubject != null">
+        business_subject,
+      </if>
+      <if test="assessDate != null">
+        assess_date,
+      </if>
+      <if test="ycqts != null">
+        ycqts,
+      </if>
+      <if test="attendance != null">
+        attendance,
+      </if>
+      <if test="attendPoint != null">
+        attend_point,
+      </if>
+      <if test="avgTeamNum != null">
+        avg_team_num,
+      </if>
+      <if test="teamPoint != null">
+        team_point,
+      </if>
+      <if test="evaluate != null">
+        evaluate,
+      </if>
+      <if test="performPoint != null">
+        perform_point,
+      </if>
+      <if test="deductReason != null">
+        deduct_reason,
+      </if>
+      <if test="deductPoint != null">
+        deduct_point,
+      </if>
+      <if test="plusReason != null">
+        plus_reason,
+      </if>
+      <if test="plusPoint != null">
+        plus_point,
+      </if>
+      <if test="totalPoint != null">
+        total_point,
+      </if>
+      <if test="reamrk != null">
+        reamrk,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ipcompanyId != null">
+        #{ipcompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="businessSubject != null">
+        #{businessSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="assessDate != null">
+        #{assessDate,jdbcType=DATE},
+      </if>
+      <if test="ycqts != null">
+        #{ycqts,jdbcType=DECIMAL},
+      </if>
+      <if test="attendance != null">
+        #{attendance,jdbcType=VARCHAR},
+      </if>
+      <if test="attendPoint != null">
+        #{attendPoint,jdbcType=INTEGER},
+      </if>
+      <if test="avgTeamNum != null">
+        #{avgTeamNum,jdbcType=DECIMAL},
+      </if>
+      <if test="teamPoint != null">
+        #{teamPoint,jdbcType=INTEGER},
+      </if>
+      <if test="evaluate != null">
+        #{evaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="performPoint != null">
+        #{performPoint,jdbcType=INTEGER},
+      </if>
+      <if test="deductReason != null">
+        #{deductReason,jdbcType=VARCHAR},
+      </if>
+      <if test="deductPoint != null">
+        #{deductPoint,jdbcType=INTEGER},
+      </if>
+      <if test="plusReason != null">
+        #{plusReason,jdbcType=VARCHAR},
+      </if>
+      <if test="plusPoint != null">
+        #{plusPoint,jdbcType=INTEGER},
+      </if>
+      <if test="totalPoint != null">
+        #{totalPoint,jdbcType=INTEGER},
+      </if>
+      <if test="reamrk != null">
+        #{reamrk,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessmentExample" resultType="java.lang.Integer">
+    select count(*) from incubation_park_assessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update incubation_park_assessment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ipcompanyId != null">
+        ipcompany_id = #{record.ipcompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessSubject != null">
+        business_subject = #{record.businessSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessDate != null">
+        assess_date = #{record.assessDate,jdbcType=DATE},
+      </if>
+      <if test="record.ycqts != null">
+        ycqts = #{record.ycqts,jdbcType=DECIMAL},
+      </if>
+      <if test="record.attendance != null">
+        attendance = #{record.attendance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attendPoint != null">
+        attend_point = #{record.attendPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.avgTeamNum != null">
+        avg_team_num = #{record.avgTeamNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.teamPoint != null">
+        team_point = #{record.teamPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluate != null">
+        evaluate = #{record.evaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.performPoint != null">
+        perform_point = #{record.performPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.deductReason != null">
+        deduct_reason = #{record.deductReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deductPoint != null">
+        deduct_point = #{record.deductPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.plusReason != null">
+        plus_reason = #{record.plusReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plusPoint != null">
+        plus_point = #{record.plusPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalPoint != null">
+        total_point = #{record.totalPoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.reamrk != null">
+        reamrk = #{record.reamrk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update incubation_park_assessment
+    set id = #{record.id,jdbcType=INTEGER},
+      ipcompany_id = #{record.ipcompanyId,jdbcType=INTEGER},
+      business_subject = #{record.businessSubject,jdbcType=VARCHAR},
+      assess_date = #{record.assessDate,jdbcType=DATE},
+      ycqts = #{record.ycqts,jdbcType=DECIMAL},
+      attendance = #{record.attendance,jdbcType=VARCHAR},
+      attend_point = #{record.attendPoint,jdbcType=INTEGER},
+      avg_team_num = #{record.avgTeamNum,jdbcType=DECIMAL},
+      team_point = #{record.teamPoint,jdbcType=INTEGER},
+      evaluate = #{record.evaluate,jdbcType=VARCHAR},
+      perform_point = #{record.performPoint,jdbcType=INTEGER},
+      deduct_reason = #{record.deductReason,jdbcType=VARCHAR},
+      deduct_point = #{record.deductPoint,jdbcType=INTEGER},
+      plus_reason = #{record.plusReason,jdbcType=VARCHAR},
+      plus_point = #{record.plusPoint,jdbcType=INTEGER},
+      total_point = #{record.totalPoint,jdbcType=INTEGER},
+      reamrk = #{record.reamrk,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessment">
+    update incubation_park_assessment
+    <set>
+      <if test="ipcompanyId != null">
+        ipcompany_id = #{ipcompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="businessSubject != null">
+        business_subject = #{businessSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="assessDate != null">
+        assess_date = #{assessDate,jdbcType=DATE},
+      </if>
+      <if test="ycqts != null">
+        ycqts = #{ycqts,jdbcType=DECIMAL},
+      </if>
+      <if test="attendance != null">
+        attendance = #{attendance,jdbcType=VARCHAR},
+      </if>
+      <if test="attendPoint != null">
+        attend_point = #{attendPoint,jdbcType=INTEGER},
+      </if>
+      <if test="avgTeamNum != null">
+        avg_team_num = #{avgTeamNum,jdbcType=DECIMAL},
+      </if>
+      <if test="teamPoint != null">
+        team_point = #{teamPoint,jdbcType=INTEGER},
+      </if>
+      <if test="evaluate != null">
+        evaluate = #{evaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="performPoint != null">
+        perform_point = #{performPoint,jdbcType=INTEGER},
+      </if>
+      <if test="deductReason != null">
+        deduct_reason = #{deductReason,jdbcType=VARCHAR},
+      </if>
+      <if test="deductPoint != null">
+        deduct_point = #{deductPoint,jdbcType=INTEGER},
+      </if>
+      <if test="plusReason != null">
+        plus_reason = #{plusReason,jdbcType=VARCHAR},
+      </if>
+      <if test="plusPoint != null">
+        plus_point = #{plusPoint,jdbcType=INTEGER},
+      </if>
+      <if test="totalPoint != null">
+        total_point = #{totalPoint,jdbcType=INTEGER},
+      </if>
+      <if test="reamrk != null">
+        reamrk = #{reamrk,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessment">
+    update incubation_park_assessment
+    set ipcompany_id = #{ipcompanyId,jdbcType=INTEGER},
+      business_subject = #{businessSubject,jdbcType=VARCHAR},
+      assess_date = #{assessDate,jdbcType=DATE},
+      ycqts = #{ycqts,jdbcType=DECIMAL},
+      attendance = #{attendance,jdbcType=VARCHAR},
+      attend_point = #{attendPoint,jdbcType=INTEGER},
+      avg_team_num = #{avgTeamNum,jdbcType=DECIMAL},
+      team_point = #{teamPoint,jdbcType=INTEGER},
+      evaluate = #{evaluate,jdbcType=VARCHAR},
+      perform_point = #{performPoint,jdbcType=INTEGER},
+      deduct_reason = #{deductReason,jdbcType=VARCHAR},
+      deduct_point = #{deductPoint,jdbcType=INTEGER},
+      plus_reason = #{plusReason,jdbcType=VARCHAR},
+      plus_point = #{plusPoint,jdbcType=INTEGER},
+      total_point = #{totalPoint,jdbcType=INTEGER},
+      reamrk = #{reamrk,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.com.yuanwei.center.entity.IncubationParkAssessmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from incubation_park_assessment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <cache />
+</mapper>

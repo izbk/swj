@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yuanwei.center.mapper.ForecastDetailMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.yuanwei.center.entity.ForecastDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="enterprise_code" property="enterpriseCode" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="sntq_retail_sales" property="sntqRetailSales" jdbcType="DECIMAL" />
+    <result column="compare_rise" property="compareRise" jdbcType="DECIMAL" />
+    <result column="curr_retail_sales" property="currRetailSales" jdbcType="DECIMAL" />
+    <result column="enterprise_type" property="enterpriseType" jdbcType="INTEGER" />
+    <result column="in_type" property="inType" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, enterprise_code, enterprise_name, sntq_retail_sales, compare_rise, curr_retail_sales, 
+    enterprise_type, in_type, year, month, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.ForecastDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from forecast_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from forecast_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from forecast_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.yuanwei.center.entity.ForecastDetailExample" >
+    delete from forecast_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.yuanwei.center.entity.ForecastDetail"  useGeneratedKeys="true" keyProperty="id">
+    insert into forecast_detail (id, enterprise_code, enterprise_name, 
+      sntq_retail_sales, compare_rise, curr_retail_sales, 
+      enterprise_type, in_type, year, 
+      month, create_date)
+    values (#{id,jdbcType=INTEGER}, #{enterpriseCode,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, 
+      #{sntqRetailSales,jdbcType=DECIMAL}, #{compareRise,jdbcType=DECIMAL}, #{currRetailSales,jdbcType=DECIMAL}, 
+      #{enterpriseType,jdbcType=INTEGER}, #{inType,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, 
+      #{month,jdbcType=INTEGER}, #{createDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.yuanwei.center.entity.ForecastDetail"  useGeneratedKeys="true" keyProperty="id">
+    insert into forecast_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="enterpriseCode != null" >
+        enterprise_code,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="sntqRetailSales != null" >
+        sntq_retail_sales,
+      </if>
+      <if test="compareRise != null" >
+        compare_rise,
+      </if>
+      <if test="currRetailSales != null" >
+        curr_retail_sales,
+      </if>
+      <if test="enterpriseType != null" >
+        enterprise_type,
+      </if>
+      <if test="inType != null" >
+        in_type,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseCode != null" >
+        #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="sntqRetailSales != null" >
+        #{sntqRetailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="compareRise != null" >
+        #{compareRise,jdbcType=DECIMAL},
+      </if>
+      <if test="currRetailSales != null" >
+        #{currRetailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseType != null" >
+        #{enterpriseType,jdbcType=INTEGER},
+      </if>
+      <if test="inType != null" >
+        #{inType,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.yuanwei.center.entity.ForecastDetailExample" resultType="java.lang.Integer" >
+    select count(*) from forecast_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update forecast_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseCode != null" >
+        enterprise_code = #{record.enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseName != null" >
+        enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sntqRetailSales != null" >
+        sntq_retail_sales = #{record.sntqRetailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="record.compareRise != null" >
+        compare_rise = #{record.compareRise,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currRetailSales != null" >
+        curr_retail_sales = #{record.currRetailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="record.enterpriseType != null" >
+        enterprise_type = #{record.enterpriseType,jdbcType=INTEGER},
+      </if>
+      <if test="record.inType != null" >
+        in_type = #{record.inType,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update forecast_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      enterprise_code = #{record.enterpriseCode,jdbcType=VARCHAR},
+      enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      sntq_retail_sales = #{record.sntqRetailSales,jdbcType=DECIMAL},
+      compare_rise = #{record.compareRise,jdbcType=DECIMAL},
+      curr_retail_sales = #{record.currRetailSales,jdbcType=DECIMAL},
+      enterprise_type = #{record.enterpriseType,jdbcType=INTEGER},
+      in_type = #{record.inType,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.yuanwei.center.entity.ForecastDetail" >
+    update forecast_detail
+    <set >
+      <if test="enterpriseCode != null" >
+        enterprise_code = #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="sntqRetailSales != null" >
+        sntq_retail_sales = #{sntqRetailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="compareRise != null" >
+        compare_rise = #{compareRise,jdbcType=DECIMAL},
+      </if>
+      <if test="currRetailSales != null" >
+        curr_retail_sales = #{currRetailSales,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseType != null" >
+        enterprise_type = #{enterpriseType,jdbcType=INTEGER},
+      </if>
+      <if test="inType != null" >
+        in_type = #{inType,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.yuanwei.center.entity.ForecastDetail" >
+    update forecast_detail
+    set enterprise_code = #{enterpriseCode,jdbcType=VARCHAR},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      sntq_retail_sales = #{sntqRetailSales,jdbcType=DECIMAL},
+      compare_rise = #{compareRise,jdbcType=DECIMAL},
+      curr_retail_sales = #{currRetailSales,jdbcType=DECIMAL},
+      enterprise_type = #{enterpriseType,jdbcType=INTEGER},
+      in_type = #{inType,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.com.yuanwei.center.entity.ForecastDetailExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from forecast_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+    <insert id="batchInsert" parameterType="List" >
+    insert into forecast_detail (enterprise_code, enterprise_name, 
+      sntq_retail_sales, compare_rise, curr_retail_sales, 
+      enterprise_type, in_type, year, 
+      month, create_date)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.enterpriseCode,jdbcType=VARCHAR}, #{item.enterpriseName,jdbcType=VARCHAR}, 
+      #{item.sntqRetailSales,jdbcType=DECIMAL}, #{item.compareRise,jdbcType=DECIMAL}, #{item.currRetailSales,jdbcType=DECIMAL}, 
+      #{item.enterpriseType,jdbcType=INTEGER}, #{item.inType,jdbcType=INTEGER}, #{item.year,jdbcType=INTEGER}, 
+      #{item.month,jdbcType=INTEGER}, #{item.createDate,jdbcType=DATE})
+      </foreach>
+  </insert>
+  <cache />
+</mapper>
